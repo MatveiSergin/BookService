@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 
 from crud.books import BooksCRUD
-from database.database import BooksORM
 
 router = APIRouter(prefix="/books")
 

@@ -1,7 +1,8 @@
 from typing import TypeVar, Generic, Optional
 
 from pydantic import BaseModel
-from database.database import db_session, ModelORM, LanguagesORM
+from database.database import db_session, ModelORM
+from models.models import LanguagesORM
 from sqlalchemy import select, delete
 from schemas.schemas import LanguageAdd
 

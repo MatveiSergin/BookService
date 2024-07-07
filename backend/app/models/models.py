@@ -26,16 +26,17 @@ class GenresORM(ModelORM):
     __tablename__ = "genres"
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
     description: Mapped[str]
-    books: Mapped[list["BooksORM"]] = relationship(back_populates="genres", secondary="association_books_genres")
+    #books: Mapped[list["BooksORM"]] = relationship(back_populates="genres", secondary="association_books_genres")
 
 class TagsORM(ModelORM):
     __tablename__ = "tags"
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
+    #books: Mapped[list["BooksORM"]] = relationship(back_populates="genres", secondary="association_books_tags")
 
 class AssociationBooksTags(ModelORM):
     __tablename__ = "association_books_tags"
-    book_id = mapped_column(ForeignKey("books.id", ondelete="CASCADE"), primary_key=True)
-    tag_id = mapped_column(ForeignKey("tags.id", ondelete="CASCADE"), primary_key=True)
+    book_id: Mapped[int] = mapped_column(ForeignKey("books.id", ondelete="CASCADE"), primary_key=True)
+    tag_id: Mapped[int] = mapped_column(ForeignKey("tags.id", ondelete="CASCADE"), primary_key=True)
 
 class AssociationBooksGenres(ModelORM):
     __tablename__ = "association_books_genres"
@@ -50,5 +51,5 @@ class BooksORM(ModelORM):
     author_id = mapped_column(ForeignKey(AuthorsORM.id, ondelete="CASCADE"))
     publisher_id = mapped_column(ForeignKey(PublishersORM.id, ondelete="CASCADE"))
     year: Mapped[int]
-    tags: Mapped[list["TagsORM"]] = relationship(back_populates="books", secondary="association_books_tags")
-    genres: Mapped[list["GenresORM"]] = relationship(back_populates="books", secondary="association_books_genres")
+    tags: Mapped[list["TagsORM"]] = relationship("TagsORM", secondary="association_books_tags")
+    genres: Mapped[list["GenresORM"]] = relationship("GenresORM", secondary="association_books_genres")

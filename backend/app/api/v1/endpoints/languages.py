@@ -1,8 +1,5 @@
 from typing import Annotated
-
-from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
-
+from fastapi import APIRouter, Depends, HTTPException, Request
 from crud.languages import LanguagesCRUD
 from schemas.schemas import LanguageBase, LanguageAdd, ResponseSchemas
 
@@ -10,12 +7,12 @@ router = APIRouter(prefix="/languages")
 
 
 @router.get("/all")
-async def get_languages() -> list[LanguageBase]:
+async def get_languages(request: Request) -> list[LanguageBase]:
     languages = await LanguagesCRUD.get_all()
     return languages
 
 @router.get("/{language_id}")
-async def get_language(language_id: int) -> LanguageBase:
+async def get_language(request: Request, language_id: int) -> LanguageBase:
     language = await LanguagesCRUD.get_by_id(language_id)
 
     if not language:

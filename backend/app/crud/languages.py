@@ -1,5 +1,5 @@
 from crud.base_crud import BaseCRUD
-from database.database import LanguagesORM
+from models.models import LanguagesORM
 from schemas.schemas import LanguageBase
 
 

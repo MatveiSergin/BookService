@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
     DATABASE: str
+    AUTH_SECRET: str
+    AUTH_RESET_SECRET: str
     ENGINE_ECHO: bool = True
     ENGINE_POOL_SIZE: int = 10
     @property

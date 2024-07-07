@@ -1,5 +1,5 @@
 from crud.base_crud import BaseCRUD
-from database.database import BooksORM
+from models.models import BooksORM
 
 
 class BooksCRUD(BaseCRUD):
